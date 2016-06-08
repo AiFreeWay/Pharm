@@ -9,8 +9,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import java.io.File;
-
 public class MainScreen implements Screen {
 
     private Stage mStage;
@@ -29,7 +27,7 @@ public class MainScreen implements Screen {
     @Override
     public void show() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("res/main.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("s_main.fxml"));
             mStage.setTitle(getTitle());
             mStage.setScene(new Scene(root, 600, 520));
             mStage.show();

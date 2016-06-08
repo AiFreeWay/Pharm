@@ -14,6 +14,7 @@ import sample.domain.interactors.LoadFile;
 import sample.domain.models.Record;
 import sample.domain.utils.InteractorsFactory;
 import sample.presentation.Main;
+import sample.presentation.views.CellViewFull;
 import sample.presentation.views.LoadScreen;
 
 import java.io.File;
@@ -45,6 +46,7 @@ public class LoadController {
     @FXML
     private void initialize() {
         mLoadFile = (LoadFile) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.LOAD_FILE);
+        loadLvRecords.setCellFactory(param -> new CellViewFull());
         initClickListeners();
     }
 
@@ -84,6 +86,7 @@ public class LoadController {
                     MainController.updateRecords();
                 })
                 .subscribe(this::showRecords, throwable -> {
+                    loadBtnLoad.setDisable(false);
                     if (!(throwable instanceof IllegalStateException))
                         showMessage(ERROR_MESSAGE);
                     throwable.printStackTrace();

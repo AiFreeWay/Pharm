@@ -38,7 +38,8 @@ public class LoadFile implements Interactor2<List<Record>, String, Runnable> {
                     for (int i=0; i<=myExcelSheet.getLastRowNum(); i++) {
                         Row row = myExcelSheet.getRow(i);
                         Record record = RecordMapper.mapRecord(row);
-                        records.add(record);
+                        if (!record.getId().isEmpty())
+                            records.add(record);
                     }
                     myExcelBook.close();
                     subscriber.onNext(records);

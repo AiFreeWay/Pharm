@@ -15,6 +15,7 @@ import sample.domain.utils.InteractorsFactory;
 import sample.presentation.Main;
 import sample.presentation.models.SearchParams;
 import sample.presentation.utils.SearchParamsBuilder;
+import sample.presentation.views.CellViewShort;
 import sample.presentation.views.SearchScreen;
 
 import java.io.File;
@@ -69,6 +70,7 @@ public class SearchController {
         mDownload = (Download) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.DOWNLOAD);
         mDelete = (Delete) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.DELETE);
         searchLvRecords.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        searchLvRecords.setCellFactory(param -> new CellViewShort());
         initClickListeners();
     }
 
@@ -195,6 +197,8 @@ public class SearchController {
                     .subscribe(aVoid -> {
 
                     }, throwable -> {
+                        searchBtnDeleteSelection.setDisable(false);
+                        searchBtnDeleteAll.setDisable(false);
                         showMessage(DELETE_ERROR);
                     });
     }

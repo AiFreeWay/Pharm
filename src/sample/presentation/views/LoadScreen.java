@@ -23,7 +23,7 @@ public class LoadScreen implements Screen {
     @Override
     public void show() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("res/load.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("s_load.fxml"));
             mStage.setTitle(getTitle());
             mStage.setScene(new Scene(root, 579, 448));
             mStage.show();

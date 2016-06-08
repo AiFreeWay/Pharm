@@ -12,6 +12,7 @@ import sample.domain.utils.InteractorsFactory;
 import sample.domain.interactors.GetData;
 import sample.presentation.Main;
 import sample.presentation.utils.ScreenFactory;
+import sample.presentation.views.CellViewShort;
 import sample.presentation.views.Screen;
 
 import java.util.List;
@@ -60,7 +61,7 @@ public class MainController {
     private GetData mGetData;
 
     private ObservableList<Record> mRecords = FXCollections.observableArrayList();
-    private final ObservableList<Integer> mRecordsCounts = FXCollections.observableArrayList(30, 50, 100);
+    private final ObservableList<Integer> mRecordsCounts = FXCollections.observableArrayList(50, 100, 200, 500);
 
     public static void updateRecords() {
         sMainController.loadData(sPage, sMainController.ActionShowRecords);
@@ -73,6 +74,7 @@ public class MainController {
         initClickListeners();
         mainChbRecordsCount.setItems(mRecordsCounts);
         mainChbRecordsCount.setValue(mRecordsCounts.get(0));
+        mainLvRecords.setCellFactory(param -> new CellViewShort());
         loadData(sPage, ActionShowRecords);
     }
 

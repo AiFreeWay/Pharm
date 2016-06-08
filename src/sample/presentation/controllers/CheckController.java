@@ -15,6 +15,7 @@ import sample.domain.interactors.Download;
 import sample.domain.models.Record;
 import sample.domain.utils.InteractorsFactory;
 import sample.presentation.Main;
+import sample.presentation.views.CellViewFull;
 import sample.presentation.views.CheckScreen;
 
 import java.io.File;
@@ -50,6 +51,7 @@ public class CheckController {
     private void initialize() {
         mCheckFile = (CheckFile) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.CHECK_FILE);
         mDownload = (Download) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.DOWNLOAD);
+        checkLvRecords.setCellFactory(param -> new CellViewFull());
         initClickListeners();
     }
 

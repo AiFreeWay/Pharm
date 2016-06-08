@@ -8,6 +8,7 @@ public class Record {
     private String certificate;
     private String date;
     private String description;
+    private String loadDate;
 
     public Record() {
 
@@ -20,6 +21,16 @@ public class Record {
         this.certificate = certificate;
         this.date = date;
         this.description = description;
+    }
+
+    public Record(String id, String title, String provider, String certificate, String date, String description, String loadDate) {
+        this.id = id;
+        this.title = title;
+        this.provider = provider;
+        this.certificate = certificate;
+        this.date = date;
+        this.description = description;
+        this.loadDate = loadDate;
     }
 
     public String getId() {
@@ -68,6 +79,14 @@ public class Record {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLoadDate() {
+        return loadDate;
+    }
+
+    public void setLoadDate(String loadDate) {
+        this.loadDate = loadDate;
     }
 
     @Override
