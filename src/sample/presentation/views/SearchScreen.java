@@ -23,9 +23,9 @@ public class SearchScreen implements Screen {
     @Override
     public void show() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("s_search.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("res/s_search.fxml"));
             mStage.setTitle(getTitle());
-            mStage.setScene(new Scene(root, 600, 520));
+            mStage.setScene(new Scene(root, 615, 520));
             mStage.show();
         } catch (Exception e) {
             e.printStackTrace();

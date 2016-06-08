@@ -2,6 +2,7 @@ package sample.data.db_store;
 
 
 import sample.data.db_store.transaction_strategy.PharmStrategy;
+import sample.data.db_store.transaction_strategy.SharedPreferenseStrategy;
 import sample.data.db_store.transaction_strategy.Strategy;
 import sample.data.utils.DbStrategyesFactory;
 import sample.domain.models.Record;
@@ -15,8 +16,11 @@ public class DbController {
 
     public DbController() {
         initConnection();
-        if (!checkExistsTable())
+        if (!checkExistsTable(PharmStrategy.TABLE_NAME))
             createPharmTable();
+        if (!checkExistsTable(SharedPreferenseStrategy.TABLE_NAME))
+            createPreferenseTable();
+        mStrategyesFactory = new DbStrategyesFactory(mStatement);
         mStrategyesFactory = new DbStrategyesFactory(mStatement);
     }
 
@@ -38,10 +42,10 @@ public class DbController {
         return mStrategyesFactory.getStrategy(strategyType);
     };
 
-    private boolean checkExistsTable() {
+    private boolean checkExistsTable(String tableName) {
         boolean isExists = false;
         try {
-            ResultSet result = mStatement.executeQuery("SELECT EXISTS (SELECT * FROM information_schema.tables WHERE table_name = '"+ PharmStrategy.TABLE_NAME+"');");
+            ResultSet result = mStatement.executeQuery("SELECT EXISTS (SELECT * FROM information_schema.tables WHERE table_name = '"+ tableName+"');");
             result.next();
             isExists = result.getBoolean("exists");
         } catch (SQLException e) {
@@ -60,6 +64,16 @@ public class DbController {
                     PharmStrategy.COLUMN_DATE+" text, " +
                     PharmStrategy.COLUMN_DESCRIPTION+" text, " +
                     PharmStrategy.COLUMN_UPLOAD_TIME+" bigint);");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void createPreferenseTable() {
+        try {
+            mStatement.execute("CREATE TABLE "+ SharedPreferenseStrategy.TABLE_NAME+" (" +
+                    SharedPreferenseStrategy.COLUMN_KEY+" text PRIMARY KEY," +
+                    SharedPreferenseStrategy.COLUMN_VALUE+" text);");
         } catch (SQLException e) {
             e.printStackTrace();
         }

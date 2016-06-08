@@ -26,7 +26,7 @@ public class CellViewShort extends ListCell<Record> {
     private TextField v_cell_shortTfLoadDate;
 
     public CellViewShort() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("v_cell_short.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("res/v_cell_short.fxml"));
         fxmlLoader.setController(this);
         try {
             fxmlLoader.load();

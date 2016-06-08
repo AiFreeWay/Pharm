@@ -28,7 +28,7 @@ public class CellViewFull extends ListCell<Record> {
     private TextField v_cell_fullTfDescription;
 
     public CellViewFull() {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("v_cell_full.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("res/v_cell_full.fxml"));
         fxmlLoader.setController(this);
         try {
             fxmlLoader.load();
