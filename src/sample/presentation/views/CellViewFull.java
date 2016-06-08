@@ -40,9 +40,11 @@ public class CellViewFull extends ListCell<Record> {
     @Override
     protected void updateItem(Record item, boolean empty) {
         super.updateItem(item, empty);
-        setGraphic(v_cell_fullPnMain);
-        if (item != null)
+        if (item != null) {
+            setGraphic(v_cell_fullPnMain);
             loadData(item);
+        } else
+            setGraphic(null);
     }
 
     private void loadData(Record item) {

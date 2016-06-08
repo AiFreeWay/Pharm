@@ -174,14 +174,6 @@ public class SearchController {
         });
     }
 
-    private void showRecords(final List<Record> records) {
-        Platform.runLater(() -> {
-            mRecords.clear();
-            mRecords.addAll(records);
-            searchLvRecords.setItems(mRecords);
-        });
-    }
-
     private void showMessage(final String message) {
         Platform.runLater(() -> searchLblMsg.setText(message));
     }
@@ -247,6 +239,14 @@ public class SearchController {
                 mRecords.clear();
             else
                 mRecords.removeAll(records);
+        });
+    }
+
+    private void showRecords(final List<Record> records) {
+        Platform.runLater(() -> {
+            mRecords.clear();
+            mRecords.addAll(records);
+            searchLvRecords.setItems(mRecords);
         });
     }
 

@@ -38,9 +38,11 @@ public class CellViewShort extends ListCell<Record> {
     @Override
     protected void updateItem(Record item, boolean empty) {
         super.updateItem(item, empty);
-        setGraphic(v_cell_shortPnMain);
-        if (item != null)
+        if (item != null) {
+            setGraphic(v_cell_shortPnMain);
             loadData(item);
+        } else
+            setGraphic(null);
     }
 
     private void loadData(Record item) {
