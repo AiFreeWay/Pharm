@@ -27,6 +27,8 @@ public class SearchController {
     public final String POSITION_TITLE = "Серия";
     public final String TITLE_TITLE = "Наименование";
     public final String PROVIDER_TITLE = "Поставщик";
+    public final String DATE_FROM_TITLE = "Загрузка от (пр: 1.01.1999)";
+    public final String DATE_TO_TITLE = "Загрузка по (пр: 1.01.1999)";
     public final String EMPTY_LINE = "";
 
     private final String LOAD_ERROR = "Не удалось загрузить данные";
@@ -43,6 +45,10 @@ public class SearchController {
     private TextField searchTfTitle;
     @FXML
     private TextField searchTfProvider;
+    @FXML
+    private TextField searchTfDateFrom;
+    @FXML
+    private TextField searchTfDateTo;
     @FXML
     private Button searchBtnDownloadAll;
     @FXML
@@ -109,6 +115,30 @@ public class SearchController {
         searchTfProvider.setOnMouseClicked(mouseEvent -> {
             if (searchTfProvider.getText().equals(PROVIDER_TITLE))
                 searchTfProvider.setText(EMPTY_LINE);
+        });
+
+        searchTfDateFrom.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            if (!newPropertyValue) {
+                if (searchTfDateFrom.getText().isEmpty())
+                    searchTfDateFrom.setText(DATE_FROM_TITLE);
+            }
+        });
+
+        searchTfDateFrom.setOnMouseClicked(mouseEvent -> {
+            if (searchTfDateFrom.getText().equals(DATE_FROM_TITLE))
+                searchTfDateFrom.setText(EMPTY_LINE);
+        });
+
+        searchTfDateTo.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            if (!newPropertyValue) {
+                if (searchTfDateTo.getText().isEmpty())
+                    searchTfDateTo.setText(DATE_TO_TITLE);
+            }
+        });
+
+        searchTfDateTo.setOnMouseClicked(mouseEvent -> {
+            if (searchTfDateTo.getText().equals(DATE_TO_TITLE))
+                searchTfDateTo.setText(EMPTY_LINE);
         });
 
         searchBtnSearch.setOnMouseClicked(mouseEvent -> {
@@ -234,6 +264,14 @@ public class SearchController {
 
     public String getProviderFieldValue() {
         return searchTfProvider.getText();
+    }
+
+    public String getDateFromFieldValue() {
+        return searchTfDateFrom.getText();
+    }
+
+    public String getDateToFieldValue() {
+        return searchTfDateTo.getText();
     }
 
 }

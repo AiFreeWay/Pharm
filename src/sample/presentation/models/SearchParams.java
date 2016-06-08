@@ -6,14 +6,18 @@ public class SearchParams {
     private String id;
     private String title;
     private String provider;
+    private String dateFrom;
+    private String dateTo;
 
     public SearchParams() {
     }
 
-    public SearchParams(String id, String title, String provider) {
+    public SearchParams(String id, String title, String provider, String dateFrom, String dateTo) {
         this.id = id;
         this.title = title;
         this.provider = provider;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
     }
 
     public String getId() {
@@ -38,5 +42,21 @@ public class SearchParams {
 
     public void setProvider(String provider) {
         this.provider = provider;
+    }
+
+    public String getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(String dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public String getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(String dateTo) {
+        this.dateTo = dateTo;
     }
 }

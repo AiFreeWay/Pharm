@@ -19,7 +19,15 @@ public class SearchParamsBuilder {
         if (provider.equals(searchController.PROVIDER_TITLE))
             provider = searchController.EMPTY_LINE;
 
-        return new SearchParams(id, title, provider);
+        String dateFrom = escapeQuote(searchController.getDateFromFieldValue());
+        if (dateFrom.equals(searchController.DATE_FROM_TITLE))
+            dateFrom = searchController.EMPTY_LINE;
+
+        String dateTo = escapeQuote(searchController.getDateToFieldValue());
+        if (dateTo.equals(searchController.DATE_TO_TITLE))
+            dateTo = searchController.EMPTY_LINE;
+
+        return new SearchParams(id, title, provider, dateFrom, dateTo);
     }
 
     private static String escapeQuote(String data) {

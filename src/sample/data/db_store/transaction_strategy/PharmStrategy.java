@@ -8,12 +8,15 @@ import sample.presentation.models.SearchParams;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
 public class PharmStrategy extends Strategy {
 
     public static final String TABLE_NAME = "pharm";
+    private static final GregorianCalendar CALENDAR = new GregorianCalendar();
 
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_TITLE = "title";
@@ -97,6 +100,16 @@ public class PharmStrategy extends Strategy {
             conditions.append(COLUMN_PROVIDER+" ~*'" + params.getProvider() + "'");
         }
 
+        if (!params.getDateFrom().isEmpty()) {
+            addAndTag(conditions);
+            conditions.append(COLUMN_UPLOAD_TIME+" >= " + getLongDateFromString(params.getDateFrom()) + "");
+        }
+
+        if (!params.getDateTo().isEmpty()) {
+            addAndTag(conditions);
+            conditions.append(COLUMN_UPLOAD_TIME+" <= " + getLongDateFromString(params.getDateTo()) + "");
+        }
+
         if (conditions.length()>0)
             return "WHERE "+conditions.toString();
         else
@@ -111,7 +124,7 @@ public class PharmStrategy extends Strategy {
 
     private long getLongDateFromString(String date) {
         String[] dateValues = date.split("\\.");
-        Date generateDate = new Date(Integer.parseInt(dateValues[2]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[0]));
-        return generateDate.getTime();
+        CALENDAR.set(Integer.parseInt(dateValues[2]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[0]));
+        return CALENDAR.getTimeInMillis();
     }
 }
