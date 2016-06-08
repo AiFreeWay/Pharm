@@ -102,12 +102,12 @@ public class PharmStrategy extends Strategy {
 
         if (!params.getDateFrom().isEmpty()) {
             addAndTag(conditions);
-            conditions.append(COLUMN_UPLOAD_TIME+" >= " + getLongDateFromString(params.getDateFrom()) + "");
+            conditions.append(COLUMN_UPLOAD_TIME+" >= " + getLongDateFromStringFrom(params.getDateFrom()) + "");
         }
 
         if (!params.getDateTo().isEmpty()) {
             addAndTag(conditions);
-            conditions.append(COLUMN_UPLOAD_TIME+" <= " + getLongDateFromString(params.getDateTo()) + "");
+            conditions.append(COLUMN_UPLOAD_TIME+" <= " + getLongDateFromStringTo(params.getDateTo()) + "");
         }
 
         if (conditions.length()>0)
@@ -122,9 +122,23 @@ public class PharmStrategy extends Strategy {
         return stringBuilder;
     }
 
-    private long getLongDateFromString(String date) {
+    private long getLongDateFromStringFrom(String date) {
         String[] dateValues = date.split("\\.");
-        CALENDAR.set(Integer.parseInt(dateValues[2]), Integer.parseInt(dateValues[1]), Integer.parseInt(dateValues[0]));
+        CALENDAR.set(Calendar.HOUR, 0);
+        CALENDAR.set(Calendar.MINUTE, 0);
+        CALENDAR.set(Calendar.SECOND, 0);
+        CALENDAR.set(Calendar.MILLISECOND, 0);
+        CALENDAR.set(Integer.parseInt(dateValues[2]), (Integer.parseInt(dateValues[1])-1), Integer.parseInt(dateValues[0]));
+        return CALENDAR.getTimeInMillis();
+    }
+
+    private long getLongDateFromStringTo(String date) {
+        String[] dateValues = date.split("\\.");
+        CALENDAR.set(Calendar.HOUR, 23);
+        CALENDAR.set(Calendar.MINUTE, 59);
+        CALENDAR.set(Calendar.SECOND, 59);
+        CALENDAR.set(Calendar.MILLISECOND, 999);
+        CALENDAR.set(Integer.parseInt(dateValues[2]), (Integer.parseInt(dateValues[1])-1), Integer.parseInt(dateValues[0]));
         return CALENDAR.getTimeInMillis();
     }
 }

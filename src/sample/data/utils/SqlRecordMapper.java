@@ -31,6 +31,6 @@ public class SqlRecordMapper {
         String month = (CALENDAR.get(Calendar.MONTH)+1)+"";
         if (month.length() == 1)
             month = "0"+month;
-        return (CALENDAR.get(Calendar.DATE)+1)+"."+month+"."+CALENDAR.get(Calendar.YEAR);
+        return (CALENDAR.get(Calendar.DATE))+"."+month+"."+CALENDAR.get(Calendar.YEAR);
     }
 }
