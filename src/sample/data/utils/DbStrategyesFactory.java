@@ -2,6 +2,7 @@ package sample.data.utils;
 
 
 import sample.data.db_store.transaction_strategy.PharmStrategy;
+import sample.data.db_store.transaction_strategy.SharedPreferenseStrategy;
 import sample.data.db_store.transaction_strategy.Strategy;
 
 import java.sql.Statement;
@@ -13,6 +14,7 @@ public class DbStrategyesFactory {
 
     public DbStrategyesFactory(Statement statement) {
         mStrategyes[TransactionStrategyes.PHARM.id] = new PharmStrategy(statement);
+        mStrategyes[TransactionStrategyes.PREFERENSE.id] = new SharedPreferenseStrategy(statement);
     }
 
     public Strategy getStrategy(TransactionStrategyes strategyType) {
@@ -20,7 +22,8 @@ public class DbStrategyesFactory {
     }
 
     public enum TransactionStrategyes {
-        PHARM(0);
+        PHARM(0),
+        PREFERENSE(1);
 
         public int id;
 

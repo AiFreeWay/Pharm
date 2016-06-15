@@ -17,7 +17,7 @@ public class HelpScreen implements Screen {
     @Override
     public void show() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("res/help.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("res/s_help.fxml"));
             mStage.setTitle(getTitle());
             mStage.setScene(new Scene(root, 600, 400));
             mStage.show();

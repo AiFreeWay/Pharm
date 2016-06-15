@@ -3,6 +3,7 @@ package sample.data.repository;
 
 import sample.data.db_store.DbController;
 import sample.data.db_store.transaction_strategy.PharmStrategy;
+import sample.data.db_store.transaction_strategy.SharedPreferenseStrategy;
 import sample.data.utils.DbStrategyesFactory;
 import sample.domain.interfaces.Repository;
 import sample.domain.models.Record;
@@ -14,10 +15,12 @@ public class RepositoryImpl implements Repository {
 
     private DbController mDbController;
     private PharmStrategy mPharmStrategy;
+    private SharedPreferenseStrategy mSharedPreferenseStrategy;
 
     public RepositoryImpl() {
         mDbController = new DbController();
         mPharmStrategy = (PharmStrategy) mDbController.getStrategy(DbStrategyesFactory.TransactionStrategyes.PHARM);
+        mSharedPreferenseStrategy = (SharedPreferenseStrategy) mDbController.getStrategy(DbStrategyesFactory.TransactionStrategyes.PREFERENSE);
     }
 
     public List<Record> getRecords(int page, int count) throws Exception {
@@ -42,5 +45,20 @@ public class RepositoryImpl implements Repository {
     @Override
     public void deleteRecords(List<Record> records, Runnable run) throws Exception {
         mPharmStrategy.deleteRecords(records, run);
+    }
+
+    @Override
+    public void putPreferense(String key, String value) throws Exception {
+        mSharedPreferenseStrategy.put(key, value);
+    }
+
+    @Override
+    public String getPreferense(String key) throws Exception {
+        return mSharedPreferenseStrategy.get(key);
+    }
+
+    @Override
+    public void deletePreferense(String key) throws Exception {
+        mSharedPreferenseStrategy.delete(key);
     }
 }

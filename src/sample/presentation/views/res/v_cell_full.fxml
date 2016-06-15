@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="v_cell_fullPnMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="1050.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="v_cell_fullTfId" editable="false" maxHeight="20.0" maxWidth="150.0" prefHeight="20.0" prefWidth="150.0" />
+      <TextField fx:id="v_cell_fullTfTitle" editable="false" layoutX="150.0" maxHeight="20.0" maxWidth="200.0" prefHeight="20.0" prefWidth="200.0" />
+      <TextField fx:id="v_cell_fullTfProvider" editable="false" layoutX="350.0" maxHeight="20.0" maxWidth="200.0" prefHeight="20.0" prefWidth="200.0" />
+      <TextField fx:id="v_cell_fullTfCertificate" editable="false" layoutX="550.0" maxHeight="20.0" maxWidth="150.0" prefHeight="20.0" prefWidth="150.0" />
+      <TextField fx:id="v_cell_fullTfDate" editable="false" layoutX="700.0" maxHeight="20.0" maxWidth="150.0" prefHeight="20.0" prefWidth="150.0" />
+      <TextField fx:id="v_cell_fullTfDescription" editable="false" layoutX="850.0" layoutY="-1.0" maxHeight="20.0" maxWidth="200.0" prefHeight="20.0" prefWidth="200.0" />
+   </children>
+</Pane>

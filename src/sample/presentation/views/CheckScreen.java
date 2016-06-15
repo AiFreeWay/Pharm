@@ -25,7 +25,7 @@ public class CheckScreen implements Screen {
     @Override
     public void show() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("res/check.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("res/s_check.fxml"));
             mStage.setTitle(getTitle());
             mStage.setScene(new Scene(root, 579, 448));
             mStage.show();

@@ -5,6 +5,8 @@ import org.apache.poi.hssf.model.InternalWorkbook;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import rx.Observable;
 import rx.Subscriber;
 import sample.domain.interfaces.Interactor2;
@@ -26,9 +28,8 @@ public class Download implements Interactor2<Void, List<Record>, File> {
             @Override
             public void call(Subscriber<? super Void> subscriber) {
                 try {
-                    HSSFWorkbook myExcelBook = new HSSFWorkbook();
-                    HSSFWorkbook.create(InternalWorkbook.createWorkbook());
-                    HSSFSheet myExcelSheet = myExcelBook.createSheet();
+                    Workbook myExcelBook = new HSSFWorkbook();
+                    Sheet myExcelSheet = myExcelBook.createSheet();
                     for (int i=0; i<data.size(); i++) {
                         Row row = myExcelSheet.createRow(i);
                         Record record = data.get(i);

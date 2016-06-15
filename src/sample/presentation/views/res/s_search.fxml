@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="615.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.controllers.SearchController">
+   <children>
+      <TextField fx:id="searchTfId" layoutX="14.0" layoutY="14.0" text="Серия" />
+      <TextField fx:id="searchTfTitle" layoutX="213.0" layoutY="14.0" text="Наименование" />
+      <TextField fx:id="searchTfProvider" layoutX="415.0" layoutY="14.0" text="Поставщик" />
+      <Button fx:id="searchBtnSearch" layoutX="415.0" layoutY="52.0" mnemonicParsing="false" text="Найти" />
+      <ListView fx:id="searchLvRecords" layoutX="-1.0" layoutY="162.0" prefHeight="357.0" prefWidth="598.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="162.0" />
+      <Button fx:id="searchBtnDownloadAll" layoutX="497.0" layoutY="120.0" mnemonicParsing="false" text="Скачать" />
+      <Button fx:id="searchBtnDeleteAll" layoutX="15.0" layoutY="120.0" mnemonicParsing="false" text="Удалить всё" />
+      <Button fx:id="searchBtnDeleteSelection" layoutX="131.0" layoutY="120.0" mnemonicParsing="false" text="Удалить выделенное" />
+      <Label fx:id="searchLblMsg" layoutX="15.0" layoutY="91.0" prefHeight="21.0" textFill="#bd1111" />
+      <Button fx:id="searchBtnDownloadSelection" layoutX="319.0" layoutY="120.0" mnemonicParsing="false" text="Скачать выделенное" />
+      <TextField fx:id="searchTfDateFrom" layoutX="15.0" layoutY="52.0" text="Загрузка от (пр: 1.01.1999)" />
+      <TextField fx:id="searchTfDateTo" layoutX="213.0" layoutY="52.0" text="Загрузка по (пр: 1.01.1999)" />
+   </children>
+</AnchorPane>

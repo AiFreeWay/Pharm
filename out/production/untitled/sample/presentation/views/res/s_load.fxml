@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.controllers.LoadController">
+    <children>
+        <TextField fx:id="loadTfFilePath" layoutX="14.0" layoutY="14.0" text="Путь к файлу" />
+        <Button fx:id="loadBtnLoad" layoutX="404.0" layoutY="14.0" mnemonicParsing="false" text="Загрузить" />
+        <ListView fx:id="loadLvRecords" layoutX="-1.0" layoutY="97.0" prefHeight="350.0" prefWidth="579.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="97.0" />
+      <Label fx:id="loadLblMsg" layoutX="14.0" layoutY="60.0" prefHeight="21.0" textFill="#bd1111" />
+      <Button fx:id="loadBtnSelectFile" layoutX="185.0" layoutY="14.0" mnemonicParsing="false" text="..." />
+      <CheckBox fx:id="loadChbRememberPath" layoutX="234.0" layoutY="19.0" mnemonicParsing="false" text="Запомнить путь" />
+    </children>
+</AnchorPane>

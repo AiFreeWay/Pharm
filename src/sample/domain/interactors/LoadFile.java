@@ -1,9 +1,9 @@
 package sample.domain.interactors;
 
-
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import rx.Observable;
 import rx.Subscriber;
 import sample.domain.interfaces.Interactor2;
@@ -33,12 +33,13 @@ public class LoadFile implements Interactor2<List<Record>, String, Runnable> {
             @Override
             public void call(Subscriber<? super List<Record>> subscriber) {
                 try {
-                    HSSFWorkbook myExcelBook = new HSSFWorkbook(new FileInputStream(path));
-                    HSSFSheet myExcelSheet = myExcelBook.getSheetAt(FIRST_SHEET);
+                    Workbook myExcelBook = WorkbookFactory.create(new FileInputStream(path));
+                    Sheet myExcelSheet = myExcelBook.getSheetAt(FIRST_SHEET);
                     for (int i=0; i<=myExcelSheet.getLastRowNum(); i++) {
                         Row row = myExcelSheet.getRow(i);
                         Record record = RecordMapper.mapRecord(row);
-                        records.add(record);
+                        if (!record.getId().isEmpty())
+                            records.add(record);
                     }
                     myExcelBook.close();
                     subscriber.onNext(records);

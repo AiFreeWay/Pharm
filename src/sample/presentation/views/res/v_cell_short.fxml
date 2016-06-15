@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane fx:id="v_cell_shortPnMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="v_cell_shortTfId" editable="false" layoutX="20.0" maxHeight="20.0" maxWidth="150.0" prefHeight="20.0" prefWidth="150.0" />
+      <TextField fx:id="v_cell_shortTfTitle" editable="false" layoutX="170.0" maxHeight="20.0" maxWidth="200.0" prefHeight="20.0" prefWidth="200.0" />
+      <TextField fx:id="v_cell_shortTfProvider" editable="false" layoutX="370.0" maxHeight="20.0" maxWidth="200.0" prefHeight="20.0" prefWidth="200.0" />
+      <TextField fx:id="v_cell_shortTfLoadDate" editable="false" layoutX="570.0" maxHeight="20.0" maxWidth="250.0" prefHeight="20.0" prefWidth="250.0" />
+   </children>
+</Pane>

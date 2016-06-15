@@ -15,6 +15,9 @@ public class InteractorsFactory {
         mInteractors[Interactors.GET_DATA_WITH_PARAMS.id] = new GetDataWithParams();
         mInteractors[Interactors.DOWNLOAD.id] = new Download();
         mInteractors[Interactors.DELETE.id] = new Delete();
+        mInteractors[Interactors.GET_PREFERENSE.id] = new GetPreferense();
+        mInteractors[Interactors.PUT_PREFERENSE.id] = new PutPreferense();
+        mInteractors[Interactors.DELETE_PREFERENSE.id] = new DeletePreferese();
     }
 
     public BaseInteractor getInteractor(Interactors interactorType) {
@@ -27,7 +30,10 @@ public class InteractorsFactory {
         CHECK_FILE(2),
         GET_DATA_WITH_PARAMS(3),
         DOWNLOAD(4),
-        DELETE(5);
+        DELETE(5),
+        GET_PREFERENSE(6),
+        PUT_PREFERENSE(7),
+        DELETE_PREFERENSE(8);
 
         int id;
 
