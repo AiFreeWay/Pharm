@@ -90,7 +90,7 @@ public class PharmStrategy extends Strategy {
     private String generateSqlConditions(SearchParams params) {
         StringBuilder conditions = new StringBuilder();
         if (!params.getId().isEmpty())
-            conditions.append(COLUMN_ID+" = '"+params.getId()+"'");
+            conditions.append(COLUMN_ID+" ~* '"+params.getId()+"'");
         if (!params.getTitle().isEmpty()) {
             addAndTag(conditions);
             conditions.append(COLUMN_TITLE+" ~*'" + params.getTitle() + "'");
