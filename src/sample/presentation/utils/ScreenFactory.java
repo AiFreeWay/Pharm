@@ -26,6 +26,7 @@ public class ScreenFactory {
         mScreens[Screens.SEARCH.id] = new SearchScreen(stageFactory());
         mScreens[Screens.CHECK.id] = new CheckScreen(stageFactory());
         mScreens[Screens.LOAD.id] = new LoadScreen(stageFactory());
+        mScreens[Screens.ADD_RECORD.id] = new AddRecordScreen(stageFactory());
     }
 
     public Screen getScreen(Screens screenType) {
@@ -37,7 +38,8 @@ public class ScreenFactory {
         HELP(1),
         SEARCH(2),
         CHECK(3),
-        LOAD(4);
+        LOAD(4),
+        ADD_RECORD(5);
 
         int id;
 

@@ -1,12 +1,9 @@
 package sample.domain.interactors;
 
-
-import org.apache.poi.hssf.model.InternalWorkbook;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import rx.Observable;
 import rx.Subscriber;
 import sample.domain.interfaces.Interactor2;
@@ -14,11 +11,9 @@ import sample.domain.models.Record;
 import sample.domain.utils.RecordMapper;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.sql.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
+
 
 public class Download implements Interactor2<Void, List<Record>, File> {
 
@@ -28,7 +23,7 @@ public class Download implements Interactor2<Void, List<Record>, File> {
             @Override
             public void call(Subscriber<? super Void> subscriber) {
                 try {
-                    Workbook myExcelBook = new HSSFWorkbook();
+                    Workbook myExcelBook = WorkbookFactory.create(data2);
                     Sheet myExcelSheet = myExcelBook.createSheet();
                     for (int i=0; i<data.size(); i++) {
                         Row row = myExcelSheet.createRow(i);

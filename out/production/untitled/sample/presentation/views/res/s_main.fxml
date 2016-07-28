@@ -8,12 +8,13 @@
     <children>
         <Button fx:id="mainBtnSearch" layoutX="33.0" layoutY="30.0" mnemonicParsing="false" text="Поиск" />
         <Button fx:id="mainBtnCheck" layoutX="33.0" layoutY="74.0" mnemonicParsing="false" text="Проверить" />
-        <Button fx:id="mainBtnHelp" layoutX="33.0" layoutY="162.0" mnemonicParsing="false" text="Помощь" />
+        <Button fx:id="mainBtnHelp" layoutX="33.0" layoutY="196.0" mnemonicParsing="false" text="Помощь" />
         <Button fx:id="mainBtnLoad" layoutX="33.0" layoutY="118.0" mnemonicParsing="false" text="Загрузить" />
         <Label fx:id="mainLblPage" layoutX="31.0" layoutY="255.0" text="Страница 1" />
         <Button fx:id="mainBtnNextPage" layoutX="76.0" layoutY="287.0" mnemonicParsing="false" text="-&gt;" />
         <Button fx:id="mainBtnPrePage" layoutX="29.0" layoutY="287.0" mnemonicParsing="false" text="&lt;-" />
         <ListView fx:id="mainLvRecords" layoutX="159.0" prefHeight="570.0" prefWidth="420.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="159.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ChoiceBox fx:id="mainChbRecordsCount" layoutX="25.0" layoutY="325.0" prefHeight="25.0" prefWidth="88.0" />
+      <Button fx:id="mainBtnAddRecord" layoutX="15.0" layoutY="157.0" mnemonicParsing="false" text="Добавить запись" />
     </children>
 </AnchorPane>

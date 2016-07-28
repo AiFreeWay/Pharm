@@ -52,6 +52,8 @@ public class MainController {
     @FXML
     private Button mainBtnPrePage;
     @FXML
+    private Button mainBtnAddRecord;
+    @FXML
     private ListView<Record> mainLvRecords;
     @FXML
     private Label mainLblPage;
@@ -86,6 +88,11 @@ public class MainController {
 
         mainBtnCheck.setOnMouseClicked(mouseEvent -> {
             Screen screen = Main.getScreenFactory().getScreen(ScreenFactory.Screens.CHECK);
+            Main.getScreenNavigator().showScreen(screen);
+        });
+
+        mainBtnAddRecord.setOnMouseClicked(mouseEvent -> {
+            Screen screen = Main.getScreenFactory().getScreen(ScreenFactory.Screens.ADD_RECORD);
             Main.getScreenNavigator().showScreen(screen);
         });
 
