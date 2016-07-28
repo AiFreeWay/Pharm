@@ -48,7 +48,7 @@ public class CellViewFull extends ListCell<Record> {
     }
 
     private void loadData(Record item) {
-        v_cell_fullTfId.setText(item.getId());
+        v_cell_fullTfId.setText(item.getSeries());
         v_cell_fullTfTitle.setText(item.getTitle());
         v_cell_fullTfProvider.setText(item.getProvider());
         v_cell_fullTfCertificate.setText(item.getCertificate());

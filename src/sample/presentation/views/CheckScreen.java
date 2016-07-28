@@ -27,7 +27,7 @@ public class CheckScreen implements Screen {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("res/s_check.fxml"));
             mStage.setTitle(getTitle());
-            mStage.setScene(new Scene(root, 579, 448));
+            mStage.setScene(new Scene(root, 579, 538));
             mStage.show();
         } catch (Exception e) {
             e.printStackTrace();

@@ -21,7 +21,6 @@ public class DbController {
         if (!checkExistsTable(SharedPreferenseStrategy.TABLE_NAME))
             createPreferenseTable();
         mStrategyesFactory = new DbStrategyesFactory(mStatement);
-        mStrategyesFactory = new DbStrategyesFactory(mStatement);
     }
 
     private void initConnection() {
@@ -57,7 +56,9 @@ public class DbController {
     private void createPharmTable() {
         try {
             mStatement.execute("CREATE TABLE "+PharmStrategy.TABLE_NAME+" (" +
-                    PharmStrategy.COLUMN_ID+" text PRIMARY KEY," +
+                    PharmStrategy.COLUMN_ID+" serial PRIMARY KEY," +
+                    PharmStrategy.COLUMN_SERIES_HASH+" integer, " +
+                    PharmStrategy.COLUMN_SERIES+" text, " +
                     PharmStrategy.COLUMN_TITLE+" text, " +
                     PharmStrategy.COLUMN_PROVIDER+" text, " +
                     PharmStrategy.COLUMN_CERTIFICATE+" text, " +

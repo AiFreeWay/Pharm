@@ -5,13 +5,10 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import rx.schedulers.Schedulers;
-import sample.domain.interactors.CheckFile;
-import sample.domain.interactors.Download;
+import sample.domain.interactors.*;
+import sample.domain.models.CheckCollections;
 import sample.domain.models.Record;
 import sample.domain.utils.InteractorsFactory;
 import sample.presentation.Main;
@@ -19,7 +16,6 @@ import sample.presentation.views.CellViewFull;
 import sample.presentation.views.CheckScreen;
 
 import java.io.File;
-import java.util.List;
 
 public class CheckController {
 
@@ -28,8 +24,10 @@ public class CheckController {
     private final String PATH_TO_FILE_TITLE = "Путь к файлу";
     private final String DOWNLOAD_ERROR = "Не удалось сохранить в файл";
     private final String EMPTY_LINE = "";
+    private final String REMEMBER_FILE_TAG = "rmbfltgcheck";
 
-    private ObservableList<Record> mRecords = FXCollections.observableArrayList();
+    private ObservableList<Record> mRecordsFromDB = FXCollections.observableArrayList();
+    private ObservableList<Record> mRecordsFromFile = FXCollections.observableArrayList();
 
     @FXML
     private TextField checkTfFilePath;
@@ -42,16 +40,30 @@ public class CheckController {
     @FXML
     private Label checkLblMsg;
     @FXML
-    private ListView<Record> checkLvRecords;
+    private CheckBox checkChbRememberPath;
+    @FXML
+    private ListView<Record> checkLvRecordsFromDB;
+    @FXML
+    private ListView<Record> checkLvRecordsFromFile;
 
     private CheckFile mCheckFile;
     private Download mDownload;
+    private PutPreferense mPutPreferense;
+    private DeletePreferese mDeletePreferese;
+    private GetPreferense mGetPreferense;
 
     @FXML
     private void initialize() {
         mCheckFile = (CheckFile) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.CHECK_FILE);
         mDownload = (Download) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.DOWNLOAD);
-        checkLvRecords.setCellFactory(param -> new CellViewFull());
+        mPutPreferense = (PutPreferense) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.PUT_PREFERENSE);
+        mDeletePreferese = (DeletePreferese) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.DELETE_PREFERENSE);
+        mGetPreferense = (GetPreferense) Main.getInteractorsFactory().getInteractor(InteractorsFactory.Interactors.GET_PREFERENSE);
+        checkLvRecordsFromDB.setCellFactory(param -> new CellViewFull());
+        checkLvRecordsFromFile.setCellFactory(param -> new CellViewFull());
+        mGetPreferense.execute(REMEMBER_FILE_TAG)
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(this::loadRememberPath, Throwable::printStackTrace);
         initClickListeners();
     }
 
@@ -77,8 +89,8 @@ public class CheckController {
         checkBtnSelectFile.setOnMouseClicked(mouseEvent -> checkTfFilePath.setText(showFilechooser(CheckScreen.CHOOSER_OPEN).getAbsolutePath()));
 
         checkBtnDownload.setOnMouseClicked(mouseEvent -> {
-            if (mRecords.size()>0)
-                mDownload.execute(mRecords, showFilechooser(CheckScreen.CHOOSER_SAVE))
+            if (mRecordsFromDB.size()>0)
+                mDownload.execute(mRecordsFromDB, showFilechooser(CheckScreen.CHOOSER_SAVE))
                         .subscribeOn(Schedulers.newThread())
                         .subscribe(aVoid -> {
 
@@ -86,14 +98,25 @@ public class CheckController {
                             showMessage(DOWNLOAD_ERROR);
                         });
         });
+
+        checkChbRememberPath.setOnMouseClicked(mouseEvent -> {
+            if (!checkTfFilePath.getText().equals(PATH_TO_FILE_TITLE) && checkChbRememberPath.isSelected())
+                mPutPreferense.execute(REMEMBER_FILE_TAG, checkTfFilePath.getText())
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe();
+            else
+                mDeletePreferese.execute(REMEMBER_FILE_TAG)
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe();
+        });
     }
 
     private void checkFile(String path) {
         mCheckFile.execute(path)
                 .subscribeOn(Schedulers.newThread())
-                .subscribe(records -> {
-                    showRecords(records);
-                    showMessage(RESULT_MESSAGE+records.size());
+                .subscribe(checkCollections -> {
+                    showRecords(checkCollections);
+                    showMessage(RESULT_MESSAGE+checkCollections.getRecordsFromFile().size());
                 }, throwable -> {
                     if (!(throwable instanceof IllegalStateException))
                         showMessage(ERROR_MESSAGE);
@@ -101,13 +124,18 @@ public class CheckController {
                 });
     }
 
-    private void showRecords(final List<Record> records) {
+    private void showRecords(final CheckCollections checkCollections) {
         Platform.runLater(() -> {
-            mRecords.clear();
-            mRecords.addAll(records);
-            checkLvRecords.setItems(mRecords);
+            mRecordsFromDB.clear();
+            mRecordsFromDB.addAll(checkCollections.getRecordsFromDB());
+            checkLvRecordsFromDB.setItems(mRecordsFromDB);
+
+            mRecordsFromFile.clear();
+            mRecordsFromFile.addAll(checkCollections.getRecordsFromFile());
+            checkLvRecordsFromFile.setItems(mRecordsFromFile);
         });
     }
+
 
     private void showMessage(final String message) {
         Platform.runLater(() -> checkLblMsg.setText(message));
@@ -115,5 +143,12 @@ public class CheckController {
 
     private File showFilechooser(int chooserType) {
         return  CheckScreen.showFileChooser(chooserType);
+    }
+
+    private void loadRememberPath(final String path) {
+        Platform.runLater(() -> {
+            checkChbRememberPath.setSelected(true);
+            checkTfFilePath.setText(path);
+        });
     }
 }

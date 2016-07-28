@@ -46,7 +46,7 @@ public class CellViewShort extends ListCell<Record> {
     }
 
     private void loadData(Record item) {
-        v_cell_shortTfId.setText(item.getId());
+        v_cell_shortTfId.setText(item.getSeries());
         v_cell_shortTfTitle.setText(item.getTitle());
         v_cell_shortTfProvider.setText(item.getProvider());
         v_cell_shortTfLoadDate.setText(DATE_TITLE+" "+item.getLoadDate());

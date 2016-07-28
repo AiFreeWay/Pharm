@@ -9,6 +9,7 @@ import rx.Observable;
 import rx.Subscriber;
 import sample.domain.interfaces.Interactor1;
 import sample.domain.interfaces.Repository;
+import sample.domain.models.CheckCollections;
 import sample.domain.models.Record;
 import sample.domain.utils.RecordMapper;
 import sample.presentation.Main;
@@ -17,7 +18,7 @@ import java.io.FileInputStream;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CheckFile implements Interactor1<List<Record>, String> {
+public class CheckFile implements Interactor1<CheckCollections, String> {
 
     private final int FIRST_SHEET = 0;
 
@@ -28,13 +29,12 @@ public class CheckFile implements Interactor1<List<Record>, String> {
     }
 
     @Override
-    public Observable<List<Record>> execute(final String path) {
-        final List<Record> records = new LinkedList<>();
-        Observable.OnSubscribe<List<Record>> observer = new Observable.OnSubscribe<List<Record>>() {
+    public Observable<CheckCollections> execute(final String path) {
+        Observable.OnSubscribe<CheckCollections> observer = new Observable.OnSubscribe<CheckCollections>() {
             @Override
-            public void call(Subscriber<? super List<Record>> subscriber) {
+            public void call(Subscriber<? super CheckCollections> subscriber) {
                 try {
-
+                    List<Record> records = new LinkedList<>();
                     Workbook myExcelBook = WorkbookFactory.create(new FileInputStream(path));
                     Sheet myExcelSheet = myExcelBook.getSheetAt(FIRST_SHEET);
                     for (int i = 0; i<=myExcelSheet.getLastRowNum(); i++) {
@@ -43,8 +43,7 @@ public class CheckFile implements Interactor1<List<Record>, String> {
                         records.add(record);
                     }
                     myExcelBook.close();
-                    List<Record> existsRecords = mRepository.checkRecords(records);
-                    subscriber.onNext(existsRecords);
+                    subscriber.onNext(mRepository.checkRecords(records));
                 } catch (Exception e) {
                     e.printStackTrace();
                     subscriber.onError(e);

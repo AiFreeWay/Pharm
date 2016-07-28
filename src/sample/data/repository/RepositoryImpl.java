@@ -6,6 +6,7 @@ import sample.data.db_store.transaction_strategy.PharmStrategy;
 import sample.data.db_store.transaction_strategy.SharedPreferenseStrategy;
 import sample.data.utils.DbStrategyesFactory;
 import sample.domain.interfaces.Repository;
+import sample.domain.models.CheckCollections;
 import sample.domain.models.Record;
 import sample.presentation.models.SearchParams;
 
@@ -33,7 +34,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public List<Record> checkRecords(List<Record> records) throws Exception {
+    public CheckCollections checkRecords(List<Record> records) throws Exception {
         return mPharmStrategy.checkRecords(records);
     }
 

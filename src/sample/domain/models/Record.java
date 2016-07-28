@@ -2,7 +2,9 @@ package sample.domain.models;
 
 public class Record {
 
-    private String id;
+    private int id;
+    private int series_hash;
+    private String series;
     private String title;
     private String provider;
     private String certificate;
@@ -14,8 +16,9 @@ public class Record {
 
     }
 
-    public Record(String id, String title, String provider, String certificate, String date, String description) {
-        this.id = id;
+    public Record(int series_hash, String series, String title, String provider, String certificate, String date, String description) {
+        this.series_hash = series_hash;
+        this.series = series;
         this.title = title;
         this.provider = provider;
         this.certificate = certificate;
@@ -23,8 +26,10 @@ public class Record {
         this.description = description;
     }
 
-    public Record(String id, String title, String provider, String certificate, String date, String description, String loadDate) {
+    public Record(int id, int series_hash, String series, String title, String provider, String certificate, String date, String description, String loadDate) {
         this.id = id;
+        this.series_hash = series_hash;
+        this.series = series;
         this.title = title;
         this.provider = provider;
         this.certificate = certificate;
@@ -33,12 +38,28 @@ public class Record {
         this.loadDate = loadDate;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getSeriesHash() {
+        return series_hash;
+    }
+
+    public void setSeriesHash(int series_hash) {
+        this.series_hash = series_hash;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
     }
 
     public String getTitle() {

@@ -7,9 +7,9 @@ import sample.presentation.models.SearchParams;
 public class SearchParamsBuilder {
 
     public static SearchParams Build(SearchController searchController) {
-        String id = escapeQuote(searchController.getIdFieldValue());
-        if (id.equals(searchController.POSITION_TITLE))
-            id = searchController.EMPTY_LINE;
+        String series = escapeQuote(searchController.getIdFieldValue());
+        if (series.equals(searchController.POSITION_TITLE))
+            series = searchController.EMPTY_LINE;
 
         String title = escapeQuote(searchController.getTitleFieldValue());
         if (title.equals(searchController.TITLE_TITLE))
@@ -27,7 +27,7 @@ public class SearchParamsBuilder {
         if (dateTo.equals(searchController.DATE_TO_TITLE))
             dateTo = searchController.EMPTY_LINE;
 
-        return new SearchParams(id, title, provider, dateFrom, dateTo);
+        return new SearchParams(series, title, provider, dateFrom, dateTo);
     }
 
     private static String escapeQuote(String data) {

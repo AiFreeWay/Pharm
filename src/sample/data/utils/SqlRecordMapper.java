@@ -13,7 +13,9 @@ public class SqlRecordMapper {
     private static final GregorianCalendar CALENDAR = new GregorianCalendar();
 
     public static Record mapRecord(ResultSet result) throws Exception {
-        return new Record(result.getString(PharmStrategy.COLUMN_ID),
+        return new Record(result.getInt(PharmStrategy.COLUMN_ID),
+                result.getInt(PharmStrategy.COLUMN_SERIES_HASH),
+                result.getString(PharmStrategy.COLUMN_SERIES),
                 result.getString(PharmStrategy.COLUMN_TITLE),
                 result.getString(PharmStrategy.COLUMN_PROVIDER),
                 result.getString(PharmStrategy.COLUMN_CERTIFICATE),
@@ -23,7 +25,7 @@ public class SqlRecordMapper {
     }
 
     public static String mapRecord(Record record) {
-        return "'"+record.getId()+"', '"+record.getTitle()+"', '"+record.getProvider()+"', '"+record.getCertificate()+"', '"+record.getDate()+"', '"+record.getDescription()+"', "+System.currentTimeMillis();
+        return record.getSeries().hashCode()+", '"+record.getSeries()+"', '"+record.getTitle()+"', '"+record.getProvider()+"', '"+record.getCertificate()+"', '"+record.getDate()+"', '"+record.getDescription()+"', "+System.currentTimeMillis();
     }
 
     private static String parseDate(Long dateLong) {
