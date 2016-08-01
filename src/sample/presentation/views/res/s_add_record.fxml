@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="448.0" prefWidth="579.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.presentation.controllers.AddRecordContoller">
+   <children>
+      <Label layoutX="28.0" layoutY="32.0" text="Название" />
+      <Label layoutX="28.0" layoutY="63.0" text="Серия*" />
+      <Label layoutX="28.0" layoutY="94.0" text="Производитель" />
+      <Label layoutX="28.0" layoutY="124.0" text="Сертификат" />
+      <Label layoutX="28.0" layoutY="154.0" text="Дата" />
+      <Label layoutX="28.0" layoutY="185.0" text="Дополнительное описание" />
+      <TextField fx:id="addRecordTfDescription" layoutX="237.0" layoutY="180.0" />
+      <TextField fx:id="addRecordTfDate" layoutX="237.0" layoutY="149.0" />
+      <TextField fx:id="addRecordTfSertificate" layoutX="237.0" layoutY="119.0" />
+      <TextField fx:id="addRecordTfProvider" layoutX="237.0" layoutY="89.0" />
+      <TextField fx:id="addRecordTfSeries" layoutX="237.0" layoutY="58.0" />
+      <TextField fx:id="addRecordTfTitle" layoutX="237.0" layoutY="27.0" />
+      <Button fx:id="addRecordBtnAdd" layoutX="28.0" layoutY="224.0" mnemonicParsing="false" text="Добавить" />
+      <Label fx:id="addRecordLblWarning" layoutX="140.0" layoutY="229.0" textFill="#bd1111" />
+   </children>
+</AnchorPane>

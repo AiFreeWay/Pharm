@@ -95,6 +95,10 @@ public class PharmStrategy extends Strategy {
             }
     }
 
+    public void addRecord(Record record) throws Exception {
+        mStatement.execute("INSERT INTO "+TABLE_NAME+" ("+COLUMN_SERIES_HASH+", "+COLUMN_SERIES+", "+COLUMN_TITLE+", "+COLUMN_PROVIDER+", "+COLUMN_CERTIFICATE+", "+COLUMN_DATE+", "+COLUMN_DESCRIPTION+", "+COLUMN_UPLOAD_TIME+") VALUES ("+SqlRecordMapper.mapRecord(record)+");");
+    }
+
     private int getOffsetByPage(int page, int count) {
         return (page-1)*count;
     }

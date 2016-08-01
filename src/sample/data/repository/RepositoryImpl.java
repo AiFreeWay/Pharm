@@ -62,4 +62,9 @@ public class RepositoryImpl implements Repository {
     public void deletePreferense(String key) throws Exception {
         mSharedPreferenseStrategy.delete(key);
     }
+
+    @Override
+    public void addRecord(Record record) throws Exception {
+        mPharmStrategy.addRecord(record);
+    }
 }

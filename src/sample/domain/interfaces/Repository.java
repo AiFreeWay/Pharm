@@ -17,4 +17,5 @@ public interface Repository {
     void putPreferense(String key, String value) throws Exception;
     String getPreferense(String key) throws Exception;
     void deletePreferense(String key) throws Exception;
+    void addRecord(Record record) throws Exception;
 }

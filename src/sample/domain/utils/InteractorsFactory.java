@@ -18,6 +18,7 @@ public class InteractorsFactory {
         mInteractors[Interactors.GET_PREFERENSE.id] = new GetPreferense();
         mInteractors[Interactors.PUT_PREFERENSE.id] = new PutPreferense();
         mInteractors[Interactors.DELETE_PREFERENSE.id] = new DeletePreferese();
+        mInteractors[Interactors.ADD_RECORD.id] = new AddRecord();
     }
 
     public BaseInteractor getInteractor(Interactors interactorType) {
@@ -33,7 +34,8 @@ public class InteractorsFactory {
         DELETE(5),
         GET_PREFERENSE(6),
         PUT_PREFERENSE(7),
-        DELETE_PREFERENSE(8);
+        DELETE_PREFERENSE(8),
+        ADD_RECORD(9);
 
         int id;
 
