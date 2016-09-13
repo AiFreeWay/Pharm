@@ -25,7 +25,7 @@ public class SqlRecordMapper {
     }
 
     public static String mapRecord(Record record) {
-        return record.getSeries().hashCode()+", '"+record.getSeries()+"', '"+record.getTitle()+"', '"+record.getProvider()+"', '"+record.getCertificate()+"', '"+record.getDate()+"', '"+record.getDescription()+"', "+System.currentTimeMillis();
+        return record.getId()+", "+record.getSeries().hashCode()+", '"+record.getSeries()+"', '"+record.getTitle()+"', '"+record.getProvider()+"', '"+record.getCertificate()+"', '"+record.getDate()+"', '"+record.getDescription()+"', "+System.currentTimeMillis();
     }
 
     private static String parseDate(Long dateLong) {

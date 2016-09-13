@@ -24,6 +24,7 @@ public class CheckController {
     private final String PATH_TO_FILE_TITLE = "Путь к файлу";
     private final String DOWNLOAD_ERROR = "Не удалось сохранить в файл";
     private final String EMPTY_LINE = "";
+    private final String COUNT_TITLE = "Проверено ";
     private final String REMEMBER_FILE_TAG = "rmbfltgcheck";
 
     private ObservableList<Record> mRecordsFromDB = FXCollections.observableArrayList();
@@ -51,6 +52,7 @@ public class CheckController {
     private PutPreferense mPutPreferense;
     private DeletePreferese mDeletePreferese;
     private GetPreferense mGetPreferense;
+    private int mCheckedRecordsCount = 0;
 
     @FXML
     private void initialize() {
@@ -112,7 +114,9 @@ public class CheckController {
     }
 
     private void checkFile(String path) {
-        mCheckFile.execute(path)
+        mCheckFile.execute(path, () -> {
+            ++mCheckedRecordsCount;
+            showMessage(getLoadMessage());})
                 .subscribeOn(Schedulers.newThread())
                 .subscribe(checkCollections -> {
                     showRecords(checkCollections);
@@ -150,5 +154,9 @@ public class CheckController {
             checkChbRememberPath.setSelected(true);
             checkTfFilePath.setText(path);
         });
+    }
+
+    private String getLoadMessage() {
+        return COUNT_TITLE+" "+mCheckedRecordsCount;
     }
 }

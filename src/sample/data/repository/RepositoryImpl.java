@@ -34,8 +34,8 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public CheckCollections checkRecords(List<Record> records) throws Exception {
-        return mPharmStrategy.checkRecords(records);
+    public CheckCollections checkRecords(List<Record> records, Runnable run) throws Exception {
+        return mPharmStrategy.checkRecords(records, run);
     }
 
     @Override

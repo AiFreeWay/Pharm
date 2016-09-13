@@ -3,6 +3,7 @@ package sample.presentation.models;
 
 public class SearchParams {
 
+    private String id;
     private String series;
     private String title;
     private String provider;
@@ -12,12 +13,21 @@ public class SearchParams {
     public SearchParams() {
     }
 
-    public SearchParams(String series, String title, String provider, String dateFrom, String dateTo) {
+    public SearchParams(String id, String series, String title, String provider, String dateFrom, String dateTo) {
+        this.id = id;
         this.series = series;
         this.title = title;
         this.provider = provider;
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getSeries() {

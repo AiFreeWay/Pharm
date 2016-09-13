@@ -26,6 +26,17 @@ public class Record {
         this.description = description;
     }
 
+    public Record(int id, int series_hash, String series, String title, String provider, String certificate, String date, String description) {
+        this.id = id;
+        this.series_hash = series_hash;
+        this.series = series;
+        this.title = title;
+        this.provider = provider;
+        this.certificate = certificate;
+        this.date = date;
+        this.description = description;
+    }
+
     public Record(int id, int series_hash, String series, String title, String provider, String certificate, String date, String description, String loadDate) {
         this.id = id;
         this.series_hash = series_hash;
@@ -36,6 +47,16 @@ public class Record {
         this.date = date;
         this.description = description;
         this.loadDate = loadDate;
+    }
+
+    @Override
+    public int hashCode() {
+        return getId();
+    }
+
+    @Override
+    public String toString() {
+        return id+" "+title+" "+date;
     }
 
     public int getId() {
@@ -108,10 +129,5 @@ public class Record {
 
     public void setLoadDate(String loadDate) {
         this.loadDate = loadDate;
-    }
-
-    @Override
-    public String toString() {
-        return id+" "+title+" "+date;
     }
 }

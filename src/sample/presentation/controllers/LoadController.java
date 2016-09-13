@@ -99,8 +99,7 @@ public class LoadController {
     private void loadFile(String path) {
         mLoadFile.execute(path, () -> {
             ++mLoadRecordsCount;
-            showMessage(getLoadMessage());
-        })
+            showMessage(getLoadMessage());})
                 .subscribeOn(Schedulers.newThread())
                 .doOnSubscribe(() -> {
                     loadBtnLoad.setDisable(true);

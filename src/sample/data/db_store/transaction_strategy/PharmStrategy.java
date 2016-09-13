@@ -59,17 +59,18 @@ public class PharmStrategy extends Strategy {
     public void putRecords(List<Record> records, Runnable run) throws Exception {
         for (Record record : records) {
             run.run();
-            ResultSet result = mStatement.executeQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COLUMN_SERIES_HASH+" = "+record.getSeriesHash()+";");
+            ResultSet result = mStatement.executeQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COLUMN_ID+" = "+record.getId()+";");
             if (!result.next())
-                mStatement.execute("INSERT INTO "+TABLE_NAME+" ("+COLUMN_SERIES_HASH+", "+COLUMN_SERIES+", "+COLUMN_TITLE+", "+COLUMN_PROVIDER+", "+COLUMN_CERTIFICATE+", "+COLUMN_DATE+", "+COLUMN_DESCRIPTION+", "+COLUMN_UPLOAD_TIME+") VALUES ("+SqlRecordMapper.mapRecord(record)+");");
+                mStatement.execute("INSERT INTO "+TABLE_NAME+" ("+COLUMN_ID+", "+COLUMN_SERIES_HASH+", "+COLUMN_SERIES+", "+COLUMN_TITLE+", "+COLUMN_PROVIDER+", "+COLUMN_CERTIFICATE+", "+COLUMN_DATE+", "+COLUMN_DESCRIPTION+", "+COLUMN_UPLOAD_TIME+") VALUES ("+SqlRecordMapper.mapRecord(record)+");");
         }
     }
 
-    public CheckCollections checkRecords(List<Record> records) throws Exception {
+    public CheckCollections checkRecords(List<Record> records, Runnable run) throws Exception {
         CheckCollections checkCollections = new CheckCollections();
         List<Record> recordsFromDb = new LinkedList<>();
         List<Record> recordsFromFile = new LinkedList<>();
         for (Record record : records) {
+            run.run();
             ResultSet result = mStatement.executeQuery("SELECT * FROM "+TABLE_NAME+" WHERE "+COLUMN_SERIES_HASH+" = "+record.getSeriesHash()+";");
             boolean isAddedToRecordsFileList = false;
             while (result.next()) {
@@ -96,7 +97,7 @@ public class PharmStrategy extends Strategy {
     }
 
     public void addRecord(Record record) throws Exception {
-        mStatement.execute("INSERT INTO "+TABLE_NAME+" ("+COLUMN_SERIES_HASH+", "+COLUMN_SERIES+", "+COLUMN_TITLE+", "+COLUMN_PROVIDER+", "+COLUMN_CERTIFICATE+", "+COLUMN_DATE+", "+COLUMN_DESCRIPTION+", "+COLUMN_UPLOAD_TIME+") VALUES ("+SqlRecordMapper.mapRecord(record)+");");
+        mStatement.execute("INSERT INTO "+TABLE_NAME+" ("+COLUMN_ID+", "+COLUMN_SERIES_HASH+", "+COLUMN_SERIES+", "+COLUMN_TITLE+", "+COLUMN_PROVIDER+", "+COLUMN_CERTIFICATE+", "+COLUMN_DATE+", "+COLUMN_DESCRIPTION+", "+COLUMN_UPLOAD_TIME+") VALUES ("+SqlRecordMapper.mapRecord(record)+");");
     }
 
     private int getOffsetByPage(int page, int count) {
@@ -105,8 +106,12 @@ public class PharmStrategy extends Strategy {
 
     private String generateSqlConditions(SearchParams params) {
         StringBuilder conditions = new StringBuilder();
-        if (!params.getSeries().isEmpty())
-            conditions.append(COLUMN_SERIES+" ~*'"+params.getSeries()+"'");
+        if (!params.getId().isEmpty())
+            conditions.append(COLUMN_ID+" = "+params.getId());
+        if (!params.getSeries().isEmpty()) {
+            addAndTag(conditions);
+            conditions.append(COLUMN_SERIES+" ~*'" + params.getSeries() + "'");
+        }
         if (!params.getTitle().isEmpty()) {
             addAndTag(conditions);
             conditions.append(COLUMN_TITLE+" ~*'" + params.getTitle() + "'");

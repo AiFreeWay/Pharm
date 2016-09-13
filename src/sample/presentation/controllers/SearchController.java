@@ -24,7 +24,8 @@ import java.util.Optional;
 
 public class SearchController {
 
-    public final String POSITION_TITLE = "Серия";
+    public final String ID_TITLE = "Id";
+    public final String SERIES_TITLE = "Серия";
     public final String TITLE_TITLE = "Наименование";
     public final String PROVIDER_TITLE = "Поставщик";
     public final String DATE_FROM_TITLE = "Загрузка от (пр: 1.01.1999)";
@@ -41,6 +42,8 @@ public class SearchController {
 
     @FXML
     private TextField searchTfId;
+    @FXML
+    private TextField searchTfSeries;
     @FXML
     private TextField searchTfTitle;
     @FXML
@@ -84,13 +87,25 @@ public class SearchController {
         searchTfId.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
                 if (searchTfId.getText().isEmpty())
-                    searchTfId.setText(POSITION_TITLE);
+                    searchTfId.setText(ID_TITLE);
             }
         });
 
         searchTfId.setOnMouseClicked(mouseEvent -> {
-            if (searchTfId.getText().equals(POSITION_TITLE))
+            if (searchTfId.getText().equals(ID_TITLE))
                 searchTfId.setText(EMPTY_LINE);
+        });
+
+        searchTfSeries.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            if (!newPropertyValue) {
+                if (searchTfSeries.getText().isEmpty())
+                    searchTfSeries.setText(SERIES_TITLE);
+            }
+        });
+
+        searchTfSeries.setOnMouseClicked(mouseEvent -> {
+            if (searchTfSeries.getText().equals(SERIES_TITLE))
+                searchTfSeries.setText(EMPTY_LINE);
         });
 
         searchTfTitle.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
@@ -256,6 +271,10 @@ public class SearchController {
 
     public String getIdFieldValue() {
         return searchTfId.getText();
+    }
+
+    public String getSeriesFieldValue() {
+        return searchTfSeries.getText();
     }
 
     public String getTitleFieldValue() {
