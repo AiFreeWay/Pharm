@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane fx:id="v_cell_shortPnMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="v_cell_shortPnMain" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="28.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <TextField fx:id="v_cell_shortTfId" editable="false" layoutX="20.0" maxHeight="20.0" maxWidth="150.0" prefHeight="20.0" prefWidth="150.0" />
       <TextField fx:id="v_cell_shortTfSeries" editable="false" layoutX="170.0" maxHeight="20.0" maxWidth="150.0" prefHeight="20.0" prefWidth="150.0" />

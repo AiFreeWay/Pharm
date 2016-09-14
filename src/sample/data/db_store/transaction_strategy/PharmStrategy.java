@@ -149,7 +149,7 @@ public class PharmStrategy extends Strategy {
         CALENDAR.set(Calendar.MINUTE, 0);
         CALENDAR.set(Calendar.SECOND, 0);
         CALENDAR.set(Calendar.MILLISECOND, 0);
-        CALENDAR.set(Integer.parseInt(dateValues[2]), (Integer.parseInt(dateValues[1])), Integer.parseInt(dateValues[0]));
+        CALENDAR.set(Integer.parseInt(dateValues[2]), (Integer.parseInt(dateValues[1]))-1, Integer.parseInt(dateValues[0]));
         return CALENDAR.getTimeInMillis();
     }
 
@@ -159,7 +159,7 @@ public class PharmStrategy extends Strategy {
         CALENDAR.set(Calendar.MINUTE, 59);
         CALENDAR.set(Calendar.SECOND, 59);
         CALENDAR.set(Calendar.MILLISECOND, 999);
-        CALENDAR.set(Integer.parseInt(dateValues[2]), (Integer.parseInt(dateValues[1])), Integer.parseInt(dateValues[0]));
+        CALENDAR.set(Integer.parseInt(dateValues[2]), (Integer.parseInt(dateValues[1]))-1, Integer.parseInt(dateValues[0]));
         return CALENDAR.getTimeInMillis();
     }
 }
